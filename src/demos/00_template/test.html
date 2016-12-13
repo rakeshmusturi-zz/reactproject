@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>React - Template</title>
+    <link rel="stylesheet" href="../../css/main.css" />
+    <script src="../../js/react.min.js"></script>
+    <script src="../../js/react-dom.min.js"></script>
+    <script src="../../js/browser.min.js"></script>
+    <style>
+    @import "https://fonts.googleapis.com/css?family=Share+Tech+Mono";
+    body {
+      background: #EBEBEB;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center;
+      -webkit-box-pack: center;
+          -ms-flex-pack: center;
+              justify-content: center;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      font-family: 'Share Tech Mono';
+    }
+
+    .App {
+      height: 400px;
+      width: 300px;
+      -webkit-perspective: 0 200px;
+              perspective: 0 200px;
+      background: #EBEBEB;
+      -webkit-transform: scale(0.8) rotateX(45deg) rotateZ(45deg);
+              transform: scale(0.8) rotateX(45deg) rotateZ(45deg);
+      -webkit-transition: -webkit-transform .5s ease .5s;
+      transition: -webkit-transform .5s ease .5s;
+      transition: transform .5s ease .5s;
+      transition: transform .5s ease .5s, -webkit-transform .5s ease .5s;
+      position: relative;
+    }
+    .App:hover {
+      -webkit-transform: scale(1.5) rotateX(0) rotateZ(0);
+              transform: scale(1.5) rotateX(0) rotateZ(0);
+    }
+    .App:hover::before {
+      opacity: 0;
+      height: 0;
+    }
+    .App:hover::after {
+      opacity: 0;
+      width: 0;
+    }
+    .App::before {
+      position: absolute;
+      content: '';
+      background: #bdc7b7;
+      width: 100%;
+      height: 10px;
+      top: 100%;
+      left: 10px;
+      -webkit-transform: skewX(45deg);
+              transform: skewX(45deg);
+      opacity: 1;
+      -webkit-transform-origin: 0 100%;
+              transform-origin: 0 100%;
+      -webkit-perspective: 0 200px;
+              perspective: 0 200px;
+      -webkit-transition: height .5s ease .5s, opacity .5s ease .5s, -webkit-transform .5s ease .5s;
+      transition: height .5s ease .5s, opacity .5s ease .5s, -webkit-transform .5s ease .5s;
+      transition: transform .5s ease .5s, height .5s ease .5s, opacity .5s ease .5s;
+      transition: transform .5s ease .5s, height .5s ease .5s, opacity .5s ease .5s, -webkit-transform .5s ease .5s;
+      border-bottom-left-radius: 5px;
+      border-bottom-right-radius: 1px;
+    }
+    .App::after {
+      position: absolute;
+      content: '';
+      background: #d7ddd3;
+      width: 10px;
+      height: 100%;
+      bottom: 0;
+      left: 100%;
+      -webkit-transform: skewY(45deg);
+              transform: skewY(45deg);
+      -webkit-transform-origin: 0 100%;
+              transform-origin: 0 100%;
+      -webkit-perspective: 0 200px;
+              perspective: 0 200px;
+      opacity: 1;
+      -webkit-transition: width .5s ease .5s, opacity .5s ease .5s, -webkit-transform .5s ease .5s;
+      transition: width .5s ease .5s, opacity .5s ease .5s, -webkit-transform .5s ease .5s;
+      transition: transform .5s ease .5s, width .5s ease .5s, opacity .5s ease .5s;
+      transition: transform .5s ease .5s, width .5s ease .5s, opacity .5s ease .5s, -webkit-transform .5s ease .5s;
+      border-top-right-radius: 5px;
+      border-bottom-right-radius: 1px;
+    }
+
+    .Display {
+      background: #2B293D;
+      color: #59C3C3;
+      text-shadow: 0 0 5px rgba(89, 195, 195, 0.5);
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-pack: end;
+          -ms-flex-pack: end;
+              justify-content: flex-end;
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center;
+      padding: 0 29px;
+      box-sizing: border-box;
+      height: 20%;
+      overflow: hidden;
+      font-size: 24px;
+      position: relative;
+    }
+    .Display::after {
+      /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+0,f1f1f1+50,e1e1e1+51,f6f6f6+100;White+Gloss+%231 */
+      background: white;
+      /* Old browsers */
+      /* FF3.6-15 */
+      background: -webkit-linear-gradient(top, white 0%, #f1f1f1 50%, #e1e1e1 51%, #f6f6f6 100%);
+      /* Chrome10-25,Safari5.1-6 */
+      background: linear-gradient(to bottom, white 0%, #f1f1f1 50%, #e1e1e1 51%, #f6f6f6 100%);
+      /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f6f6f6',GradientType=0 );
+      /* IE6-9 */
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      pointer-events: none;
+      height: 100%;
+      mix-blend-mode: overlay;
+      display: block;
+      z-index: 2;
+    }
+
+    .Buttons {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+          -ms-flex-direction: column;
+              flex-direction: column;
+      height: 80%;
+    }
+
+    .Button {
+      background: #cad2c5;
+      /* Old browsers */
+      /* FF3.6-15 */
+      background: -webkit-linear-gradient(45deg, #cad2c5 0%, #abb5aa 100%);
+      /* Chrome10-25,Safari5.1-6 */
+      background: linear-gradient(45deg, #cad2c5 0%, #abb5aa 100%);
+      /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cad2c5', endColorstr='#abb5aa',GradientType=1 );
+      /* IE6-9 fallback on horizontal gradient */
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      box-sizing: border-box;
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center;
+      -webkit-box-pack: center;
+          -ms-flex-pack: center;
+              justify-content: center;
+      width: 25%;
+      font-size: 24px;
+      color: rgba(0, 0, 0, 0.5);
+      height: 20%;
+      min-width: 25%;
+    }
+    .Button[data-size="2"] {
+      height: 40%;
+    }
+    .Button[data-value="null"] {
+      pointer-events: none;
+    }
+    .Button:hover {
+      background: #d7ddd3;
+      cursor: pointer;
+    }
+    .Button:active {
+      background: #bdc7b7;
+    }
+
+    </style>
+</head>
+<body>
+
+    <div id="app"></div>
+
+    <script type="text/babel">
+   var App = React.createClass({
+    getInitialState: function() {
+        return ({
+            operations: []
+        });
+    },
+    calculateOperations: function() {
+        var result = '';
+        var operation = '';
+        this.state.operations.map(function(operation, i) {
+            result += operation;
+            console.log(result);
+        });
+        
+        result = String(eval(result));
+        console.log(result);
+        this.setState({ result: result });
+    },
+    handleClick: function(e) {
+        var value = e.target.getAttribute('data-value');
+        
+        switch (value) {
+            case 'clear':
+                this.setState({ operations: [], result: '' });
+                break;
+            case 'equal':
+                this.calculateOperations();
+                break;
+            default:
+                if(this.state.result) {
+                    this.setState({ result: '', operations:[]}, function() {
+                        this.state.operations.push(value);
+                        this.forceUpdate();
+                    });
+                } else {
+                    this.state.operations.push(value);  
+                }
+                break;
+        }
+        
+        // console.log(operations);
+        this.forceUpdate();
+    },
+    render: function() {
+        return (
+            <div className="App">
+                <Display data={this.state.operations} result={this.state.result} />
+                <Buttons>
+                    <Button onClick={this.handleClick} label="C" value="clear" />
+                    <Button onClick={this.handleClick} label="7" value="7" />
+                    <Button onClick={this.handleClick} label="4" value="4" />
+                    <Button onClick={this.handleClick} label="1" value="1" />
+                    <Button onClick={this.handleClick} label="0" value="0" />
+                    
+                    <Button onClick={this.handleClick} label="/" value="/" />
+                    <Button onClick={this.handleClick} label="8" value="8" />
+                    <Button onClick={this.handleClick} label="5" value="5" />
+                    <Button onClick={this.handleClick} label="2" value="2" />
+                    <Button onClick={this.handleClick} label="." value="." />
+                    
+                    <Button onClick={this.handleClick} label="X" value="*" />
+                    <Button onClick={this.handleClick} label="9" value="9" />
+                    <Button onClick={this.handleClick} label="6" value="6" />
+                    <Button onClick={this.handleClick} label="3" value="3" />
+                    <Button label="" value="null" />
+                    
+                    <Button onClick={this.handleClick} label="-" value="-" />
+                    <Button onClick={this.handleClick} label="+" size="2" value="+" />
+                    <Button onClick={this.handleClick} label="=" size="2" value="equal" />
+                </Buttons>
+            </div>
+        );
+    }
+   });
+
+   var Display = React.createClass({
+    render: function() {
+        var string = '';
+        var value = this.props.data.map(function(operation, i) {
+            string += operation; 
+        });
+        
+        if(this.props.result) {
+            string = this.props.result;
+        }
+        
+        return (
+            <div className="Display">
+                {string}
+            </div>
+        );
+    }
+   });
+
+   var Buttons = React.createClass({
+    render: function() {
+        return (
+            <div className="Buttons">
+                {this.props.children}
+            </div>
+        )
+    }
+   });
+
+   var Button = React.createClass({
+    render: function() {
+        return (
+            <div onClick={this.props.onClick} className="Button" data-size={this.props.size} data-value={this.props.value}>
+            {this.props.label}  
+            </div>
+        )
+    }
+   });
+
+   ReactDOM.render(<App />, document.getElementById('app'));
+    </script>
+
+</body>
+</html>
